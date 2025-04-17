@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ucapan Kerabat</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fa;
+      padding: 20px;
+    }
+    .comment-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 15px 0;
+      padding: 15px 20px;
+      transition: 0.3s;
+    }
+    .comment-card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .name {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .message {
+      color: #555;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Ucapan dari Kerabat 💌</h2>
+  <div id="comments"></div>
+
+  <script>
+    const publicSpreadsheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ20esSgCIeBgykEy4MxP4cMivz3mkBP9WS7QlaoIJOQBmbbyIvkutuZoUnladkNjtRbZsb_wBXyQk5/pubhtml'; // Ganti dengan link kamu
+
+    function showInfo(data, tabletop) {
+      const container = document.getElementById("comments");
+      data.forEach(entry => {
+        const card = document.createElement("div");
+        card.className = "comment-card";
+        card.innerHTML = `
+          <div class="name">${entry.NAMA}</div>
+          <div class="message">"${entry.UCAPAN}"</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      Tabletop.init({
+        key: publicSpreadsheetURL,
+        callback: showInfo,
+        simpleSheet: true
+      });
+    });
+  </script>
+
+</body>
+</html>
